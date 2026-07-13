@@ -1,14 +1,414 @@
-<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Happy Birthday</title><style>
-body,html{margin:0;height:100%;overflow:hidden;font-family:Arial;background:#ffb6d5}.page{position:absolute;inset:0;display:none;align-items:center;justify-content:center;flex-direction:column}.show{display:flex}button{padding:15px 30px;font-size:22px;border-radius:30px;border:none}.small{font-size:10px;padding:4px;position:absolute}.float{position:fixed;bottom:-30px;animation:f 8s linear infinite;color:#fff}.pink{background:#ffc1dc}.type{max-width:800px;white-space:pre-wrap;padding:20px;overflow:auto;height:60vh} @keyframes f{to{transform:translateY(-120vh)}}
-</style></head><body>
-<div id=p1 class="page show"><h1>KAMU SAYANG AKU GA? 🥺❤️</h1><button onclick="p2()">💖 SAYANG BANGET 💖</button><button id=n class=small>ngga</button></div>
-<div id=p2 class="page"><h1>Okeyy cintaku sayangku 😘💖</h1><button onclick="go()">Klik Lanjut ❤️</button><div id=c></div></div>
-<div id=p3 class="page pink"><h1>🎉 Happy Birthday ke-19 yaa, Plimaa! 🤍🎉</h1><div id=t class=type></div><button id=h style="display:none" onclick="alert('Aku sayang kamu selamanya, Plima ❤️')">🤗 Peluk Virtual</button></div>
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday Plima ❤️</title>
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+overflow:hidden;
+background:#ffb6d9;
+height:100vh;
+}
+
+.page{
+position:absolute;
+width:100%;
+height:100%;
+display:none;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+text-align:center;
+padding:20px;
+}
+
+.active{
+display:flex;
+}
+
+h1{
+font-size:40px;
+color:white;
+text-shadow:2px 2px 10px #ff1493;
+margin-bottom:30px;
+}
+
+button{
+border:none;
+cursor:pointer;
+transition:.3s;
+}
+
+#yesBtn{
+padding:18px 40px;
+font-size:28px;
+border-radius:50px;
+background:#ff1493;
+color:white;
+box-shadow:0 0 20px hotpink;
+}
+
+#yesBtn:hover{
+transform:scale(1.08);
+}
+
+#noBtn{
+position:absolute;
+font-size:11px;
+padding:4px 8px;
+border-radius:20px;
+background:#444;
+color:white;
+}
+
+#page2 h2{
+font-size:40px;
+color:white;
+margin-bottom:20px;
+}
+
+#nextBtn{
+padding:18px 35px;
+border-radius:40px;
+background:#ff1493;
+color:white;
+font-size:25px;
+}
+
+#countdown{
+font-size:100px;
+color:white;
+margin-top:30px;
+font-weight:bold;
+text-shadow:0 0 15px deeppink;
+}
+
+#page3{
+background:linear-gradient(180deg,#ffd6eb,#ffc0dd,#ffb6d9);
+overflow:hidden;
+}
+
+#typing{
+width:90%;
+max-width:900px;
+height:60vh;
+overflow:auto;
+background:rgba(255,255,255,.4);
+padding:20px;
+border-radius:20px;
+backdrop-filter:blur(10px);
+font-size:22px;
+line-height:1.8;
+color:#6b0048;
+text-align:left;
+box-shadow:0 0 25px rgba(255,255,255,.5);
+}
+
+#hugBtn{
+display:none;
+margin-top:25px;
+padding:18px 35px;
+font-size:25px;
+border-radius:50px;
+background:#ff1493;
+color:white;
+}
+
+.floating{
+position:absolute;
+bottom:-60px;
+font-size:30px;
+animation:floatUp linear forwards;
+pointer-events:none;
+}
+
+@keyframes floatUp{
+0%{
+transform:translateY(0) rotate(0deg);
+opacity:0;
+}
+20%{
+opacity:1;
+}
+100%{
+transform:translateY(-120vh) rotate(360deg);
+opacity:0;
+}
+}
+
+.heart{
+position:absolute;
+bottom:-50px;
+color:#ff1493;
+font-size:25px;
+animation:heartFloat linear infinite;
+opacity:.7;
+}
+
+@keyframes heartFloat{
+0%{
+transform:translateY(0) scale(.5);
+opacity:0;
+}
+20%{
+opacity:1;
+}
+100%{
+transform:translateY(-120vh) scale(1.4);
+opacity:0;
+}
+}
+
+.confetti{
+position:absolute;
+width:10px;
+height:20px;
+animation:confettiFall linear forwards;
+}
+
+@keyframes confettiFall{
+0%{
+transform:translateY(-50px) rotate(0deg);
+}
+100%{
+transform:translateY(120vh) rotate(720deg);
+}
+}
+</style>
+</head>
+
+<body>
+
+<div id="page1" class="page active">
+
+<h1>KAMU SAYANG AKU GA? 🥺❤️</h1>
+
+<button id="yesBtn">
+💖 SAYANG BANGET 💖
+</button>
+
+<button id="noBtn">
+ngga
+</button>
+
+</div>
+
+<div id="page2" class="page">
+
+<h2>Okeyy cintaku sayangku 😘💖</h2>
+
+<button id="nextBtn">
+Klik Lanjut ❤️
+</button>
+
+<div id="countdown"></div>
+
+</div>
+
+<div id="page3" class="page">
+
+<h1>Happy Birthday ke-19 yaa, Plimaa! 🤍🎉</h1>
+
+<div id="typing"></div>
+
+<button id="hugBtn">
+🤗 Peluk Virtual
+</button>
+
+</div>
+
 <script>
-let n=document.getElementById('n');function mv(){n.style.left=Math.random()*90+'vw';n.style.top=Math.random()*90+'vh'};n.onmouseover=mv;n.ontouchstart=mv;n.onclick=()=>alert('TAUKKKKKKKKKKKKKKKK 😤 NGAMBEK!!!');mv();
-function p2(){p1.classList.remove('show');p2div=document.getElementById('p2');p2div.classList.add('show')}
-function go(){let i=3;let c=document.getElementById('c');let s=setInterval(()=>{c.innerHTML=i;i--;if(i<0){clearInterval(s);c.innerHTML='🎊 CONFETTI 🎊';setTimeout(start,800)}},700)}
-function start(){p2.classList.remove('show');p3.classList.add('show');let txt=`Happy Birthday ke-19 yaa, Plimaa! 🤍🎉
+  const page1=document.getElementById("page1");
+const page2=document.getElementById("page2");
+const page3=document.getElementById("page3");
+
+const yesBtn=document.getElementById("yesBtn");
+const noBtn=document.getElementById("noBtn");
+const nextBtn=document.getElementById("nextBtn");
+
+const countdown=document.getElementById("countdown");
+const typing=document.getElementById("typing");
+const hugBtn=document.getElementById("hugBtn");
+
+function random(min,max){
+return Math.random()*(max-min)+min;
+}
+
+// Tombol ngga kabur
+function moveButton(){
+
+noBtn.style.left=random(5,85)+"vw";
+noBtn.style.top=random(5,85)+"vh";
+
+}
+
+noBtn.addEventListener("mouseenter",moveButton);
+noBtn.addEventListener("touchstart",function(e){
+
+e.preventDefault();
+
+moveButton();
+
+});
+
+noBtn.onclick=function(){
+
+alert("TAUKKKKKKKKKKKKKKKK 😤 NGAMBEK!!!");
+
+}
+
+yesBtn.onclick=function(){
+
+page1.classList.remove("active");
+page2.classList.add("active");
+
+}
+
+nextBtn.onclick=function(){
+
+nextBtn.style.display="none";
+
+let angka=3;
+
+countdown.innerHTML=angka;
+
+const timer=setInterval(()=>{
+
+angka--;
+
+if(angka>0){
+
+countdown.innerHTML=angka;
+
+}else if(angka===0){
+
+countdown.innerHTML="1";
+
+}else{
+
+clearInterval(timer);
+
+countdown.innerHTML="🎉";
+
+confetti();
+
+setTimeout(()=>{
+
+page2.classList.remove("active");
+page3.classList.add("active");
+
+startTyping();
+
+},1500);
+
+}
+
+},1000);
+
+}
+
+// Confetti
+
+function confetti(){
+
+for(let i=0;i<250;i++){
+
+let c=document.createElement("div");
+
+c.className="confetti";
+
+c.style.left=Math.random()*100+"vw";
+
+c.style.background=
+`hsl(${Math.random()*360},100%,60%)`;
+
+c.style.animationDuration=
+(2+Math.random()*3)+"s";
+
+c.style.opacity=Math.random();
+
+document.body.appendChild(c);
+
+setTimeout(()=>{
+
+c.remove();
+
+},5000);
+
+}
+
+}
+
+// Love Background
+
+setInterval(()=>{
+
+let h=document.createElement("div");
+
+h.className="heart";
+
+h.innerHTML="❤️";
+
+h.style.left=Math.random()*100+"vw";
+
+h.style.animationDuration=
+(5+Math.random()*5)+"s";
+
+h.style.fontSize=
+(15+Math.random()*30)+"px";
+
+document.body.appendChild(h);
+
+setTimeout(()=>{
+
+h.remove();
+
+},10000);
+
+},250);
+
+// Emoji ulang tahun
+
+const emoji=["❤️","🎂","🎈","🎉","✨","19"];
+
+setInterval(()=>{
+
+let e=document.createElement("div");
+
+e.className="floating";
+
+e.innerHTML=
+emoji[Math.floor(Math.random()*emoji.length)];
+
+e.style.left=Math.random()*100+"vw";
+
+e.style.animationDuration=
+(4+Math.random()*4)+"s";
+
+e.style.fontSize=
+(25+Math.random()*30)+"px";
+
+document.body.appendChild(e);
+
+setTimeout(()=>{
+
+e.remove();
+
+},9000);
+
+},350);
+
+const text=`
+Happy Birthday ke-19 yaa, Plimaa! 🤍🎉
 
 Selamat ulang tahun, PRIMA WIJAYA KUSUMA, cintaku. Hari ini kamu genap 19 tahun. Semoga di usia yang baru ini semua doa dan cita-citamu dimudahkan satu per satu. Semoga kamu selalu diberi kesehatan, kebahagiaan, rezeki yang lancar, dan dikelilingi orang-orang yang sayang sama kamu.
 
@@ -16,7 +416,41 @@ Terima kasih karena sudah menjadi sosok yang selalu ada dan membuat hari-hariku 
 
 Semoga di umur 19 ini kamu semakin dewasa, semakin bahagia, dan semua hal baik selalu datang menghampirimu. Apa pun yang terjadi, semoga kamu selalu ingat kalau ada aku yang selalu mendoakan dan mendukungmu.
 
-Sekali lagi, selamat ulang tahun, Plima. Semoga tahun ini menjadi salah satu tahun terbaik dalam hidupmu. Aku sayang kamu, lebih dari yang bisa diungkapkan dengan kata-kata. Semoga kita bisa terus menciptakan banyak kenangan indah bersama. Selamat ulang tahun, cintaku! 😘🥳🎂`;
-let k=0;let e=document.getElementById('t');let it=setInterval(()=>{e.textContent+=txt[k++]||'';if(k>txt.length){clearInterval(it);h.style.display='block'}},20)}
-setInterval(()=>{let d=document.createElement('div');d.className='float';d.style.left=Math.random()*100+'vw';d.textContent=['❤️','🎂','🎈','🎉','✨','19'][Math.floor(Math.random()*6)];d.style.animationDuration=4+Math.random()*5+'s';document.body.appendChild(d);setTimeout(()=>d.remove(),9000)},300);
-</script></body></html>
+Sekali lagi, selamat ulang tahun, Plima. Semoga tahun ini menjadi salah satu tahun terbaik dalam hidupmu. Aku sayang kamu, lebih dari yang bisa diungkapkan dengan kata-kata. Semoga kita bisa terus menciptakan banyak kenangan indah bersama. Selamat ulang tahun, cintaku! 😘🥳🎂
+`;
+
+function startTyping(){
+
+typing.innerHTML="";
+
+let i=0;
+
+const type=setInterval(()=>{
+
+typing.innerHTML+=text.charAt(i);
+
+typing.scrollTop=typing.scrollHeight;
+
+i++;
+
+if(i>=text.length){
+
+clearInterval(type);
+
+hugBtn.style.display="inline-block";
+
+}
+
+},35);
+
+}
+
+hugBtn.onclick=function(){
+
+alert("Aku sayang kamu selamanya, Plima ❤️");
+
+}
+</script>
+
+</body>
+</html>
