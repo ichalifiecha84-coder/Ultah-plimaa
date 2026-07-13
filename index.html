@@ -1,0 +1,22 @@
+<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Happy Birthday</title><style>
+body,html{margin:0;height:100%;overflow:hidden;font-family:Arial;background:#ffb6d5}.page{position:absolute;inset:0;display:none;align-items:center;justify-content:center;flex-direction:column}.show{display:flex}button{padding:15px 30px;font-size:22px;border-radius:30px;border:none}.small{font-size:10px;padding:4px;position:absolute}.float{position:fixed;bottom:-30px;animation:f 8s linear infinite;color:#fff}.pink{background:#ffc1dc}.type{max-width:800px;white-space:pre-wrap;padding:20px;overflow:auto;height:60vh} @keyframes f{to{transform:translateY(-120vh)}}
+</style></head><body>
+<div id=p1 class="page show"><h1>KAMU SAYANG AKU GA? 🥺❤️</h1><button onclick="p2()">💖 SAYANG BANGET 💖</button><button id=n class=small>ngga</button></div>
+<div id=p2 class="page"><h1>Okeyy cintaku sayangku 😘💖</h1><button onclick="go()">Klik Lanjut ❤️</button><div id=c></div></div>
+<div id=p3 class="page pink"><h1>🎉 Happy Birthday ke-19 yaa, Plimaa! 🤍🎉</h1><div id=t class=type></div><button id=h style="display:none" onclick="alert('Aku sayang kamu selamanya, Plima ❤️')">🤗 Peluk Virtual</button></div>
+<script>
+let n=document.getElementById('n');function mv(){n.style.left=Math.random()*90+'vw';n.style.top=Math.random()*90+'vh'};n.onmouseover=mv;n.ontouchstart=mv;n.onclick=()=>alert('TAUKKKKKKKKKKKKKKKK 😤 NGAMBEK!!!');mv();
+function p2(){p1.classList.remove('show');p2div=document.getElementById('p2');p2div.classList.add('show')}
+function go(){let i=3;let c=document.getElementById('c');let s=setInterval(()=>{c.innerHTML=i;i--;if(i<0){clearInterval(s);c.innerHTML='🎊 CONFETTI 🎊';setTimeout(start,800)}},700)}
+function start(){p2.classList.remove('show');p3.classList.add('show');let txt=`Happy Birthday ke-19 yaa, Plimaa! 🤍🎉
+
+Selamat ulang tahun, PRIMA WIJAYA KUSUMA, cintaku. Hari ini kamu genap 19 tahun. Semoga di usia yang baru ini semua doa dan cita-citamu dimudahkan satu per satu. Semoga kamu selalu diberi kesehatan, kebahagiaan, rezeki yang lancar, dan dikelilingi orang-orang yang sayang sama kamu.
+
+Terima kasih karena sudah menjadi sosok yang selalu ada dan membuat hari-hariku lebih berwarna. Aku bangga sama semua usaha yang kamu lakukan sampai hari ini. Tetap jadi PRIMA yang baik, kuat, rendah hati, dan jangan pernah berhenti mengejar impianmu ya.
+
+Semoga di umur 19 ini kamu semakin dewasa, semakin bahagia, dan semua hal baik selalu datang menghampirimu. Apa pun yang terjadi, semoga kamu selalu ingat kalau ada aku yang selalu mendoakan dan mendukungmu.
+
+Sekali lagi, selamat ulang tahun, Plima. Semoga tahun ini menjadi salah satu tahun terbaik dalam hidupmu. Aku sayang kamu, lebih dari yang bisa diungkapkan dengan kata-kata. Semoga kita bisa terus menciptakan banyak kenangan indah bersama. Selamat ulang tahun, cintaku! 😘🥳🎂`;
+let k=0;let e=document.getElementById('t');let it=setInterval(()=>{e.textContent+=txt[k++]||'';if(k>txt.length){clearInterval(it);h.style.display='block'}},20)}
+setInterval(()=>{let d=document.createElement('div');d.className='float';d.style.left=Math.random()*100+'vw';d.textContent=['❤️','🎂','🎈','🎉','✨','19'][Math.floor(Math.random()*6)];d.style.animationDuration=4+Math.random()*5+'s';document.body.appendChild(d);setTimeout(()=>d.remove(),9000)},300);
+</script></body></html>
